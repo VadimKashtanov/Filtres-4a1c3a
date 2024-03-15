@@ -1,0 +1,684 @@
+Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license()" for more information.
+exec("""l = (1,4,16,64,256)
+s=[]
+for i in l:
+    for j in (1/16, 1/8, 1):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]*(1 + int(i*j<8) + int(i*j<2))
+for i in s: print(i)
+""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 16, 'interv': 1.0}
+{'K': 16, 'interv': 1.0}
+{'K': 16, 'interv': 1.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 64, 'interv': 4.0}
+{'K': 64, 'interv': 4.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 256, 'interv': 16.0}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*4
+72
+len(s)
+18
+exec("""l = (1,4,16,64)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]
+for i in s: print(i)
+""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 32}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 128}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+len(s)
+9
+9*2
+18
+9*2*5
+90
+9*2*3
+54
+with open('/home/vadim/Bureau/Filtres-V1.4+ (versions)/3b1b/prixs/prixs.bin', 'rb') as co: bins = co.read()
+
+import struct as st
+L, = st.unpack('I', bins[:4])
+prixs=st.unpack('f'*L, bins[4:])
+import matplotlib.pyplot as plt
+
+plt.plot(prixs);plt.show()
+[<matplotlib.lines.Line2D object at 0x7febd47ab400>]
+intervalle = lambda x,k: [x[i] for i in range(len(x)) if i % k == 0]
+def dx(arr, K_ema, plus, ema, interv):
+    _ema = ema(arr, K_ema)
+    _dx = [0 for _ in range(plus)]+[_ema[i]-_ema[i-plus] for i in range(plus, len(x))]
+    ema_dx = ema(_dx, ema)
+    return intervalle(ema_dx, interv)
+
+def ema(x, k):
+    s = [x[0]]
+    for i in range(1, len(x)):
+        s += [s[-1]*(1-1/k) + x[i]*1/K]
+    return s
+
+plt.plot(dx(prixs, K_ema=1, plus=1, ema=1, interv=1));plt.show()
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/idlelib/run.py", line 578, in runcode
+    exec(code, self.locals)
+  File "<pyshell#28>", line 1, in <module>
+  File "<pyshell#21>", line 2, in dx
+TypeError: 'int' object is not callable
+def dx(arr, K_ema, plus, ema, interv):
+    _ema = ema(arr, K_ema)
+    _dx = [0 for _ in range(plus)]+[_ema[i]-_ema[i-1-plus] for i in range(plus, len(x))]
+    ema_dx = ema(_dx, ema)
+    return intervalle(ema_dx, interv)
+
+plt.plot(dx(prixs, K_ema=1, plus=1, ema=1, interv=1));plt.show()
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/idlelib/run.py", line 578, in runcode
+    exec(code, self.locals)
+  File "<pyshell#31>", line 1, in <module>
+  File "<pyshell#30>", line 2, in dx
+TypeError: 'int' object is not callable
+def dx(arr, K_ema, plus, ema, interv):
+    _ema = ema(arr, K_ema)
+    _dx = [0 for _ in range(plus)]+[_ema[i]-_ema[i-1-plus] for i in range(plus, len(x))]
+    ema_dx = ema(_dx, ema)
+    return intervalle(ema_dx, interv)
+
+plt.plot(dx(prixs, K_ema=1, plus=1, ema=1, interv=1));plt.show()
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/idlelib/run.py", line 578, in runcode
+    exec(code, self.locals)
+  File "<pyshell#34>", line 1, in <module>
+  File "<pyshell#33>", line 2, in dx
+TypeError: 'int' object is not callable
+def dx(arr, K_ema, plus0, ema0, interv):
+    _ema = ema(arr, K_ema)
+    _dx = [0 for _ in range(plus0)]+[_ema[i]-_ema[i-1-plus0] for i in range(plus0, len(x))]
+    ema_dx = ema(_dx, ema0)
+    return intervalle(ema_dx, interv)
+
+plt.plot(dx(prixs, K_ema=1, plus=1, ema=1, interv=1));plt.show()
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/idlelib/run.py", line 578, in runcode
+    exec(code, self.locals)
+  File "<pyshell#37>", line 1, in <module>
+TypeError: dx() got an unexpected keyword argument 'plus'
+plt.plot(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1));plt.show()
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/idlelib/run.py", line 578, in runcode
+    exec(code, self.locals)
+  File "<pyshell#38>", line 1, in <module>
+  File "<pyshell#36>", line 2, in dx
+  File "<pyshell#27>", line 4, in ema
+NameError: name 'K' is not defined. Did you mean: 'k'?
+intervalle = lambda x,k: [x[i] for i in range(len(x)) if i % k == 0]
+def ema(x, k):
+    s = [x[0]]
+    for i in range(1, len(x)):
+        s += [s[-1]*(1-1/k) + x[i]*1/k]
+    return s
+
+plt.plot(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1));plt.show()
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/idlelib/run.py", line 578, in runcode
+    exec(code, self.locals)
+  File "<pyshell#42>", line 1, in <module>
+  File "<pyshell#36>", line 3, in dx
+NameError: name 'x' is not defined. Did you mean: 'dx'?
+def dx(arr, K_ema, plus0, ema0, interv):
+    _ema = ema(arr, K_ema)
+    _dx = [0 for _ in range(plus0)]+[_ema[i]-_ema[i-1-plus0] for i in range(plus0, len(arr))]
+    ema_dx = ema(_dx, ema0)
+    return intervalle(ema_dx, interv)
+
+plt.plot(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1));plt.show()
+[<matplotlib.lines.Line2D object at 0x7febacb14b80>]
+plt.plot(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1));plt.show()
+[<matplotlib.lines.Line2D object at 0x7feba86cdf60>]
+def norme(arr):
+	_min = min(arr)
+	_max = max(arr)
+	return [(e-_min)/(_max-_min) for e in arr]
+
+plt.plot(norme(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1)));plt.plot(norme(prixs))plt.show()
+SyntaxError: invalid syntax
+plt.plot(norme(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1)));plt.plot(norme(prixs));plt.show()
+[<matplotlib.lines.Line2D object at 0x7febaca82590>]
+[<matplotlib.lines.Line2D object at 0x7febaca82860>]
+plt.plot(norme(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1)[100:]));plt.plot(norme(prixs[100:]));plt.show()
+[<matplotlib.lines.Line2D object at 0x7feba86875b0>]
+[<matplotlib.lines.Line2D object at 0x7feba8687760>]
+plt.plot(norme(dx(prixs, K_ema=1, plus0=1, ema0=1, interv=1)[-200:]));plt.plot(norme(prixs[-200:]));plt.show()
+[<matplotlib.lines.Line2D object at 0x7feba866cbb0>]
+[<matplotlib.lines.Line2D object at 0x7feba866ce80>]
+plt.plot(norme(dx(prixs, K_ema=10, plus0=1, ema0=1, interv=1)[-200:]));plt.plot(norme(prixs[-200:]));plt.show()
+[<matplotlib.lines.Line2D object at 0x7febaca4bdf0>]
+[<matplotlib.lines.Line2D object at 0x7febacac4100>]
+plt.plot(norme(dx(prixs, K_ema=60, plus0=15, ema0=5, interv=1)[-200:]));plt.plot(norme(prixs[-200:]));plt.show()
+[<matplotlib.lines.Line2D object at 0x7feba870e9b0>]
+[<matplotlib.lines.Line2D object at 0x7feba870ec80>]
+plt.plot(norme(dx(prixs, K_ema=60, plus0=30, ema0=5, interv=1)[-200:]));plt.plot(norme(prixs[-200:]));plt.show()
+[<matplotlib.lines.Line2D object at 0x7feba87a98a0>]
+[<matplotlib.lines.Line2D object at 0x7feba87a9b70>]
+plt.plot(norme(dx(prixs, K_ema=400, plus0=30, ema0=5, interv=1)[-200:]));plt.plot(norme(prixs[-200:]));plt.show()
+[<matplotlib.lines.Line2D object at 0x7feba8746620>]
+[<matplotlib.lines.Line2D object at 0x7feba8746110>]
+plt.plot(norme(dx(prixs, K_ema=400, plus0=30, ema0=5, interv=1)[-500:]));plt.plot(norme(prixs[-500:]));plt.show()
+[<matplotlib.lines.Line2D object at 0x7feba87e0bb0>]
+[<matplotlib.lines.Line2D object at 0x7feba87e2980>]
+192+72+54
+318
+512-(192+72+54)
+194
+128*2
+256
+192+72+54
+318
+192+72+54
+318
+64*8*2
+1024
+64*8
+512
+512/24
+21.333333333333332
+exec("""l = (1,4,16,64,128,256)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]
+for i in s: print(i)""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 32}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 128}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 128}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*2*3
+78
+exec("""l = (1,8,32,128,256)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]
+for i in s: print(i)""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 64}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 256}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 128}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*2*3
+72
+192+72+72
+336
+192+54+54
+300
+192+72+72+50+30+10
+426
+192+72+72+100+30+10
+476
+192+72+72+100+40+20
+496
+192+72+72+140+40+20
+536
+exec("""l = (1,4,8,32,64,128,256)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]
+for i in s: print(i)
+""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 32}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 64}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 256}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 128}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*2*3
+96
+exec("""l = (1,2,4,8,16,64,256)
+s=[]
+for i in l:
+    for j in (1/16, 1/8, 1):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]*(1 + int(i*j<8) + int(i*j<2))
+for i in s: print(i)""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 8}
+{'K': 16, 'interv': 1.0}
+{'K': 16, 'interv': 1.0}
+{'K': 16, 'interv': 1.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 64, 'interv': 4.0}
+{'K': 64, 'interv': 4.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 256, 'interv': 16.0}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*4
+96
+exec("""l = (1,2,4,8,16,32,64,128,256)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]*(1 + int(i*j<=64)+int(i*j<=16) + int(i*j<=4)+2*int(i*j<=2))
+for i in s: print(i)""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 32}
+{'K': 4, 'interv': 32}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 64}
+{'K': 8, 'interv': 64}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 128}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 256}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 64, 'interv': 64}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 128}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*4
+256
+256+96+96
+448
+exec("""l = (1,2,4,8,16,32,64,128,256)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]*(1 + int(i*j<=64)+int(i*j<=32)+int(i*j<=16) + int(i*j<=4)+2*int(i*j<=2))
+for i in s: print(i)""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 32}
+{'K': 4, 'interv': 32}
+{'K': 4, 'interv': 32}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 64}
+{'K': 8, 'interv': 64}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 128}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 256}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 64, 'interv': 64}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 128}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*4
+316
+316+96+96
+508
+512-96*2
+320
+exec("""l = (1,2,4,8,16,32,64,128,256)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]*(1 + int(i*j<=64)+int(i*j<=16) + 2*int(i*j<=4)+3*int(i*j<=2))
+for i in s: print(i)""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 32}
+{'K': 4, 'interv': 32}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 64}
+{'K': 8, 'interv': 64}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 128}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 256}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 64, 'interv': 64}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 128}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*4
+296
+exec("""l = (1,2,4,8,16,32,64,128,256)
+s=[]
+for i in l:
+    for j in (1/8, 1, 8):
+        if 256 >= i*j >= 1:
+            s += [{
+            	'K':i,
+            	'interv':i*j
+            }]*(1 + int(i*j<=64)+int(i*j<=16) + 2*int(i*j<=4)+4*int(i*j<=2))
+for i in s: print(i)""")
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 1}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 1, 'interv': 8}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 2}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 2, 'interv': 16}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 4}
+{'K': 4, 'interv': 32}
+{'K': 4, 'interv': 32}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 1.0}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 8}
+{'K': 8, 'interv': 64}
+{'K': 8, 'interv': 64}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 2.0}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 16}
+{'K': 16, 'interv': 128}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 4.0}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 32}
+{'K': 32, 'interv': 256}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 8.0}
+{'K': 64, 'interv': 64}
+{'K': 64, 'interv': 64}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 16.0}
+{'K': 128, 'interv': 128}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 32.0}
+{'K': 256, 'interv': 256}
+len(s)*4
+312

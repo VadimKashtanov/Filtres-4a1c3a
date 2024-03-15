@@ -1,0 +1,80 @@
+nature[0] DIRECTE {}
+l = (1,2,4,8,16,32,64,128,256)
+s=[]
+for i in l:
+    for j in (1/2, 1, 2, 4):
+        if 256 >= i*j >= 1:
+            s += [{
+                'K':i,
+                'interv':i*j,
+                'params':tuple()
+            }]*(1+1*int(i*j<=16)+1
+            *int(i*j<=4))
+for i in s: print(i)
+
+{'K': 1, 'interv': 1, 'params': ()}
+{'K': 1, 'interv': 1, 'params': ()}
+{'K': 1, 'interv': 1, 'params': ()}
+{'K': 1, 'interv': 2, 'params': ()}
+{'K': 1, 'interv': 2, 'params': ()}
+{'K': 1, 'interv': 2, 'params': ()}
+{'K': 1, 'interv': 4, 'params': ()}
+{'K': 1, 'interv': 4, 'params': ()}
+{'K': 1, 'interv': 4, 'params': ()}
+{'K': 2, 'interv': 1.0, 'params': ()}
+{'K': 2, 'interv': 1.0, 'params': ()}
+{'K': 2, 'interv': 1.0, 'params': ()}
+{'K': 2, 'interv': 2, 'params': ()}
+{'K': 2, 'interv': 2, 'params': ()}
+{'K': 2, 'interv': 2, 'params': ()}
+{'K': 2, 'interv': 4, 'params': ()}
+{'K': 2, 'interv': 4, 'params': ()}
+{'K': 2, 'interv': 4, 'params': ()}
+{'K': 2, 'interv': 8, 'params': ()}
+{'K': 2, 'interv': 8, 'params': ()}
+{'K': 4, 'interv': 2.0, 'params': ()}
+{'K': 4, 'interv': 2.0, 'params': ()}
+{'K': 4, 'interv': 2.0, 'params': ()}
+{'K': 4, 'interv': 4, 'params': ()}
+{'K': 4, 'interv': 4, 'params': ()}
+{'K': 4, 'interv': 4, 'params': ()}
+{'K': 4, 'interv': 8, 'params': ()}
+{'K': 4, 'interv': 8, 'params': ()}
+{'K': 4, 'interv': 16, 'params': ()}
+{'K': 4, 'interv': 16, 'params': ()}
+{'K': 8, 'interv': 4.0, 'params': ()}
+{'K': 8, 'interv': 4.0, 'params': ()}
+{'K': 8, 'interv': 4.0, 'params': ()}
+{'K': 8, 'interv': 8, 'params': ()}
+{'K': 8, 'interv': 8, 'params': ()}
+{'K': 8, 'interv': 16, 'params': ()}
+{'K': 8, 'interv': 16, 'params': ()}
+{'K': 8, 'interv': 32, 'params': ()}
+{'K': 16, 'interv': 8.0, 'params': ()}
+{'K': 16, 'interv': 8.0, 'params': ()}
+{'K': 16, 'interv': 16, 'params': ()}
+{'K': 16, 'interv': 16, 'params': ()}
+{'K': 16, 'interv': 32, 'params': ()}
+{'K': 16, 'interv': 64, 'params': ()}
+{'K': 32, 'interv': 16.0, 'params': ()}
+{'K': 32, 'interv': 16.0, 'params': ()}
+{'K': 32, 'interv': 32, 'params': ()}
+{'K': 32, 'interv': 64, 'params': ()}
+{'K': 32, 'interv': 128, 'params': ()}
+{'K': 64, 'interv': 32.0, 'params': ()}
+{'K': 64, 'interv': 64, 'params': ()}
+{'K': 64, 'interv': 128, 'params': ()}
+{'K': 64, 'interv': 256, 'params': ()}
+{'K': 128, 'interv': 64.0, 'params': ()}
+{'K': 128, 'interv': 128, 'params': ()}
+{'K': 128, 'interv': 256, 'params': ()}
+{'K': 256, 'interv': 128.0, 'params': ()}
+{'K': 256, 'interv': 256, 'params': ()}
+
+SOURCES = 5
+
+len(s)*SOURCES = 268
+
+auto   = 
+manuel = 
+total  = 

@@ -1,0 +1,40 @@
+nature[2] CHIFFRE {cible}
+
+l = (1,8,64,256)
+s=[]
+for D in (10000,):
+    for i in l:
+        for j in (1/2, 1, 4, 8):
+            for k in (1/8, 1/2):
+                if 256 >= i*j >= 1  and i*j*k>=1:
+                    s += [{
+                        'K':i,
+                        'interv': i*j,
+                        'params':(D,)
+                    }]
+for i in s: print(i)
+
+{'K': 1, 'interv': 4, 'params': (10000,)}
+{'K': 1, 'interv': 8, 'params': (10000,)}
+{'K': 1, 'interv': 8, 'params': (10000,)}
+{'K': 8, 'interv': 4.0, 'params': (10000,)}
+{'K': 8, 'interv': 8, 'params': (10000,)}
+{'K': 8, 'interv': 8, 'params': (10000,)}
+{'K': 8, 'interv': 32, 'params': (10000,)}
+{'K': 8, 'interv': 32, 'params': (10000,)}
+{'K': 8, 'interv': 64, 'params': (10000,)}
+{'K': 8, 'interv': 64, 'params': (10000,)}
+{'K': 64, 'interv': 32.0, 'params': (10000,)}
+{'K': 64, 'interv': 32.0, 'params': (10000,)}
+{'K': 64, 'interv': 64, 'params': (10000,)}
+{'K': 64, 'interv': 64, 'params': (10000,)}
+{'K': 64, 'interv': 256, 'params': (10000,)}
+{'K': 64, 'interv': 256, 'params': (10000,)}
+{'K': 256, 'interv': 128.0, 'params': (10000,)}
+{'K': 256, 'interv': 128.0, 'params': (10000,)}
+{'K': 256, 'interv': 256, 'params': (10000,)}
+{'K': 256, 'interv': 256, 'params': (10000,)}
+
+pour (prixs, haut, bas) uniquement
+
+len(s)*3 = 60
